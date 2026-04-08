@@ -43,7 +43,7 @@ Onde:
 - $\bar{\lambda} = \sum_{k<j} (\lambda^{j}_{k}+\lambda^{k}_{j} z_{j}z_{k})$
 
 👉Isto diz-nos **o crescimento do invasor dentro da comunidade**
-
+""")
 
 st.markdown("""
  O invasor invade se:
