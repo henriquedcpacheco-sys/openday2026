@@ -54,7 +54,7 @@ st.markdown("""
 
 ## O teu objetivo
 
-Escolhe os traits do invasor e tenta:
+Escolhe os traits do invasor, com soma igual a 1, todos compreendidos entre -1 e 1, e tenta:
 
  **Invadir a comunidade!**
 
