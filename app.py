@@ -18,12 +18,12 @@ Será que ele consegue instalar-se?
 
 ## Regra do jogo
 
-O invasor consegue invadir se tiver **maior fitness médio** que a comunidade residente.
+O invasor consegue invadir se tiver **maior fitness** que o médio da comunidade residente.
 
 Ou seja:
 
-- Se crescer mais rápido → invade   
-- Se crescer mais devagar → desaparece   
+- Se o seu fitness é maior que o médio → invade   
+- Caso contrário → desaparece   
 
 ---
 
