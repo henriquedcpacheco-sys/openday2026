@@ -90,7 +90,7 @@ else:
 # =========================
 # MOSTRAR MATRIZ
 # =========================
-st.subheader("Matriz selecionada")
+st.subheader("Matriz de interações")
 import pandas as pd
 
 df = pd.DataFrame(
