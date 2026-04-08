@@ -9,7 +9,7 @@ st.markdown("""
 ## O que está a acontecer aqui?
 
 Imagina uma comunidade de espécies (por exemplo bactérias).  
-Cada espécie interage com as outras — algumas ajudam, outras competem.
+Cada espécie interage com as outras — algumas cooperam, outras competem.
 
 Agora entra um **invasor**   
 Será que ele consegue instalar-se?
