@@ -39,7 +39,7 @@ st.markdown(r"""
 Onde:
 
 - $z_j$ = abundância da espécie $j$ na comunidade  
-- $\lambda^{j}_{\text{inv}}$ = interação entre o invasor e a espécie $j$  
+- $\lambda^{j}_{\text{inv}}$ = fitness do invasor com a espécie $j$  
 - $\bar{\lambda} = \sum_{k<j} (\lambda^{j}_{k}+\lambda^{k}_{j}) z_{j}z_{k}$
 
 👉Isto diz-nos **o crescimento do invasor dentro da comunidade**
