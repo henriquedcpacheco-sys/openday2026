@@ -14,13 +14,13 @@ st.set_page_config(page_title="Replicator Dynamics Game", layout="centered")
 st.title("🧬 Replicator Dynamics — Invasion Game")
 
 st.markdown("""
-Agora o jogo é mais realista:
+Agora o jogo é:
 
 1. A comunidade evolui até equilíbrio  
 2. O invasor entra com baixa abundância  
 3. Vemos a dinâmica completa  
 
-👉 Será que ele consegue instalar-se?
+Será que ele consegue instalar-se?
 """)
 
 # =========================
@@ -53,7 +53,7 @@ st.dataframe(df)
 # =========================
 # SLIDERS
 # =========================
-st.subheader("🎮 Escolhe o invasor (linha)")
+st.subheader("Escolhe os traits de fitness do invasor (linha)")
 
 z1 = st.slider("Invader trait 1", -1.0, 1.0, 0.2)
 z2 = st.slider("Invader trait 2", -1.0, 1.0, 0.2)
@@ -61,7 +61,7 @@ inv = build_traits(z1, z2)
 
 st.write(f"Trait 3: **{inv[2]:.2f}**")
 
-st.subheader("🎮 Escolhe como a comunidade reage (coluna)")
+st.subheader(" Escolhe como a comunidade reage ao invasor (coluna)")
 
 r1 = st.slider("Resident response 1", -1.0, 1.0, 0.4)
 r2 = st.slider("Resident response 2", -1.0, 1.0, 0.3)
@@ -72,7 +72,7 @@ st.write(f"Response 3: **{res[2]:.2f}**")
 # =========================
 # BOTÃO
 # =========================
-if st.button("🚀 Simular dinâmica"):
+if st.button(" Simular dinâmica"):
 
     # correr simulação
     t1, x1, t2, x2, eq = run_dynamics(inv, res, Payoff)
@@ -147,6 +147,6 @@ if st.button("🚀 Simular dinâmica"):
     final_inv = x2[-1, 3]
 
     if final_inv > 0.1:
-        st.success("🔥 O invasor instalou-se!")
+        st.success(" O invasor instalou-se!")
     else:
-        st.error("❌ O invasor falhou!")
+        st.error(" O invasor falhou!")
