@@ -125,4 +125,4 @@ if st.button("Testar invasão"):
     if values:
         f_inv, f_res = values
         st.write(f"Fitness invader: {f_inv:.4f}")
-        st.write(f"Fitness resident: {f_res:.4f}")
+        st.write(f"Fitness médio: {f_res:.4f}")
