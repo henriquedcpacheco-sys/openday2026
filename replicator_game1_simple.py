@@ -48,7 +48,7 @@ def invasion_test(z1, z2, payoff):
     z_res = np.ones(3) / 3
 
     # fitness
-    f_inv = z @ payoff @ z_res
+    f_inv = z  @ z_res
     f_res = z_res @ payoff @ z_res
 
     if f_inv > f_res:
