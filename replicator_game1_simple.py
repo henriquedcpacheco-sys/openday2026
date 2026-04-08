@@ -31,11 +31,31 @@ def format_matrix(M):
         ["  ".join([f"{val:.2f}" for val in row]) for row in M]
     )
 
+# =========================
+# REPLICATOR DYNAMICS
+# =========================
+def replicator_dynamics(x0, A, T=50, dt=0.01):
+    x = x0.copy()
+
+    for _ in range(int(T/dt)):
+        fitness = A @ x
+        avg = x @ fitness
+        dx = x * (fitness - avg)
+
+        x = x + dt * dx
+
+        # evitar problemas numéricos
+        x = np.maximum(x, 1e-12)
+        x = x / np.sum(x)
+
+    return x
+
 
 # =========================
-# INVASION TEST
+# INVASION TEST (COM EQUILÍBRIO)
 # =========================
 def invasion_test(z1, z2, payoff):
+
     z3 = 1 - z1 - z2
 
     # validar intervalo
@@ -44,17 +64,22 @@ def invasion_test(z1, z2, payoff):
 
     z = np.array([z1, z2, z3])
 
-    # residentes uniformes
-    z_res = np.ones(3) / 3
+    # =========================
+    # PASSO 1: dinâmica residentes
+    # =========================
+    z0 = np.ones(3) / 3
+    z_res = replicator_dynamics(z0, payoff)
 
-    # fitness
-    f_inv = z  @ z_res
+    # =========================
+    # PASSO 2: fitness no equilíbrio
+    # =========================
+    f_inv = z @ z_res
     f_res = z_res @ payoff @ z_res
 
     if f_inv > f_res:
-        return " Conseguiste invadir!", (f_inv, f_res)
+        return " Conseguiste invadir!", (f_inv, f_res, z_res)
     else:
-        return " Não conseguiste...", (f_inv, f_res)
+        return " Não conseguiste...", (f_inv, f_res, z_res)
 
 
 # =========================
