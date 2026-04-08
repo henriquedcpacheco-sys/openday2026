@@ -5,7 +5,73 @@ from replicator_game1_simple import generate_matrices, invasion_test
 st.set_page_config(page_title="Replicator Game", layout="centered")
 
 st.title("🧬 Replicator Invasion Game")
+st.markdown("""
+## 🧠 O que está a acontecer aqui?
 
+Imagina uma comunidade de espécies (por exemplo bactérias).  
+Cada espécie interage com as outras — algumas ajudam, outras competem.
+
+Agora entra um **invasor** 👾  
+👉 Será que ele consegue instalar-se?
+
+---
+
+## ⚔️ Regra do jogo
+
+O invasor consegue invadir se tiver **maior fitness médio** que a comunidade residente.
+
+Ou seja:
+
+- Se crescer mais rápido → invade ✅  
+- Se crescer mais devagar → desaparece ❌  
+
+---
+
+## 📈 Como calculamos isso?
+
+A taxa de crescimento do invasor depende das interações com a comunidade:
+
+""")
+st.latex(r"""
+r_{\text{invader}} = \sum_{j=1}^{N} z_j \lambda^{j}_{\text{inv}}
+""")
+st.markdown(r"""
+Onde:
+
+- $z_j$ = abundância da espécie $j$ na comunidade  
+- $\lambda^{j}_{\text{inv}}$ = interação entre o invasor e a espécie $j$  
+
+👉 Isto diz-nos **o crescimento do invasor dentro da comunidade**
+
+---
+
+Também podemos comparar com o crescimento médio da comunidade:
+
+""")
+st.latex(r"""
+\bar{r} = z^T A z
+""")
+st.markdown("""
+👉 O invasor invade se:
+
+**r_invader > r_resident**
+
+---
+
+## 🎮 O teu objetivo
+
+Escolhe os traits do invasor e tenta:
+
+ **Invadir a comunidade!**
+
+ou
+
+ Falhar a invasão
+
+---
+
+Move os sliders e testa 👇
+""")
 # =========================
 # MATRIZES (fixas)
 # =========================
