@@ -28,7 +28,7 @@ Será que ele consegue instalar-se?
 # =========================
 @st.cache_data
 def get_matrices():
-    return generate_matrices()
+    return generate_matrices(seed=22)
 
 A, B, C = get_matrices()
 
