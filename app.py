@@ -16,7 +16,7 @@ Será que ele consegue instalar-se?
 
 ---
 
-##Regra do jogo
+## Regra do jogo
 
 O invasor consegue invadir se tiver **maior fitness médio** que a comunidade residente.
 
