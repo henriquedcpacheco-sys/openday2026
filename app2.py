@@ -146,7 +146,7 @@ if st.button(" Simular dinâmica"):
     # =========================
     final_inv = x2[-1, 3]
 
-    if final_inv > 0.1:
+    if final_inv > 1e-4:
         st.success(" O invasor instalou-se!")
     else:
         st.error(" O invasor falhou!")
