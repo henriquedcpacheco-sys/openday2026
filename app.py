@@ -104,7 +104,7 @@ st.dataframe(df)
 # =========================
 # SLIDERS
 # =========================
-st.subheader("Escolhe os traits do invasor (a sua soma tem de ser 1, por isso o 3º é automático)")
+st.subheader("Escolhe os traits do invasor (a soma tem de ser 1)")
 
 z1 = st.slider("Trait 1", -1.0, 1.0, 0.3)
 z2 = st.slider("Trait 2", -1.0, 1.0, 0.3)
