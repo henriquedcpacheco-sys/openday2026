@@ -91,7 +91,15 @@ else:
 # MOSTRAR MATRIZ
 # =========================
 st.subheader("Matriz selecionada")
-st.dataframe(np.round(Payoff, 2))
+import pandas as pd
+
+df = pd.DataFrame(
+    np.round(Payoff, 2),
+    index=[1, 2, 3],
+    columns=[1, 2, 3]
+)
+
+st.dataframe(df)
 
 # =========================
 # SLIDERS
