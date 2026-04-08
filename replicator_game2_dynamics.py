@@ -54,7 +54,7 @@ def run_dynamics(inv, res, payoff, theta=1):
         lambda t, x: replicator_rhs(t, x, payoff, theta),
         [0, 100],
         x0,
-        t_eval=np.linspace(0, 100, 100)
+        t_eval=np.linspace(0, 100, 50)
     )
 
     t1 = sol1.t
