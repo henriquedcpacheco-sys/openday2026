@@ -48,7 +48,7 @@ Onde:
 st.markdown("""
  O invasor invade se:
 
-**r_invader > 0**
+**$r_invader$ > 0**
 
 ---
 
