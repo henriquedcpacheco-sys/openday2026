@@ -87,7 +87,7 @@ def invasion_test(z1, z2, payoff):
 # =========================
 if __name__ == "__main__":
 
-    A, B, C = generate_matrices(seed=22)
+    A, B, C = generate_matrices(seed=22) ####################### MUDAR SEED AQUI
 
     print("Escolhe matriz: A, B ou C")
     choice = input(">> ").strip().upper()
