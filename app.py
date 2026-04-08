@@ -33,28 +33,22 @@ A taxa de crescimento do invasor depende das interações com a comunidade:
 
 """)
 st.latex(r"""
-r_{\text{invader}} = \sum_{j=1}^{N} z_j \lambda^{j}_{\text{inv}}
+r_{\text{invader}} = \sum_{j=1}^{N} z_j \lambda^{j}_{\text{inv}}-\bar{\lambda}
 """)
 st.markdown(r"""
 Onde:
 
 - $z_j$ = abundância da espécie $j$ na comunidade  
 - $\lambda^{j}_{\text{inv}}$ = interação entre o invasor e a espécie $j$  
+- $\bar{\lambda} = \sum_{k<j} (\lambda^{j}_{k}+\lambda^{k}_{j} z_{j}z_{k})$
 
-👉 Isto diz-nos **o crescimento do invasor dentro da comunidade**
+👉Isto diz-nos **o crescimento do invasor dentro da comunidade**
 
----
 
-Também podemos comparar com o crescimento médio da comunidade:
-
-""")
-st.latex(r"""
-\bar{r} = z^T A z
-""")
 st.markdown("""
-👉 O invasor invade se:
+ O invasor invade se:
 
-**r_invader > r_resident**
+**r_invader > 0**
 
 ---
 
@@ -70,7 +64,7 @@ ou
 
 ---
 
-Move os sliders e testa 👇
+Move os sliders e testa 
 """)
 # =========================
 # MATRIZES (fixas)
