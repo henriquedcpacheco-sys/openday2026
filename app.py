@@ -80,7 +80,7 @@ Ou seja:
 """)
 ## Como calculamos isso?
 
-A taxa de crescimento do invasor depende das interações com a comunidade:
+st.markdown("""A taxa de crescimento do invasor depende das interações com a comunidade:
 
 """)
 st.latex(r"""
