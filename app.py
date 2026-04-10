@@ -79,7 +79,7 @@ Ou seja:
 """)
 ## Como calculamos isso?
 
-st.markdown("""A taxa de crescimento do invasor depende das interações com a comunidade:
+st.markdown("""A taxa de crescimento do invasor no momento de invasão depende das suas interações com a comunidade:
 
 """)
 st.latex(r"""
