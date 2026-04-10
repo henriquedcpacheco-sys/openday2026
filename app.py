@@ -4,7 +4,7 @@ from replicator_game1_simple import generate_matrices, invasion_test
 
 st.set_page_config(page_title="Replicator Game", layout="centered")
 
-st.title("🧬 Replicator Invasion Game")
+st.title("👾 Replicator Invasion Game")
 st.markdown("""
 ## O que está a acontecer aqui?
 
@@ -18,53 +18,7 @@ Será que ele consegue instalar-se?
 
 ## Regra do jogo
 
-O invasor consegue invadir se tiver **maior fitness** que o médio da comunidade residente.
-
-Ou seja:
-
-- Se o seu fitness é maior que o médio → invade   
-- Caso contrário → desaparece   
-
----
-
-## Como calculamos isso?
-
-A taxa de crescimento do invasor depende das interações com a comunidade:
-
-""")
-st.latex(r"""
-r_{\text{invader}} = \sum_{j=1}^{N} z_j \lambda^{j}_{\text{inv}}-\bar{\lambda}
-""")
-st.markdown(r"""
-Onde:
-
-- $z_j$ = abundância da espécie $j$ na comunidade  
-- $\lambda^{j}_{\text{inv}}$ = fitness do invasor com a espécie $j$  
-- $\bar{\lambda} = \sum_{k<j} (\lambda^{j}_{k}+\lambda^{k}_{j}) z_{j}z_{k}$
-
-👉Isto diz-nos **o crescimento do invasor dentro da comunidade**
-""")
-
-st.markdown("""
- O invasor invade se:
-
-**$r_{invader}$ > 0**
-
----
-
-## O teu objetivo
-
-Escolhe os traits do invasor cuja soma é igual a 1, compreendidos entre -1 e 1, e tenta:
-
- **Invadir a comunidade!**
-
-ou
-
- Falhar a invasão
-
----
-
-Move os sliders e testa 
+Começamos por escolher um tipo de microbioma (se as espécies residentes cooperam, competem ou ambos):
 """)
 # =========================
 # MATRIZES (fixas)
@@ -100,6 +54,70 @@ df = pd.DataFrame(
 )
 
 st.dataframe(df)
+
+# =========================
+# FITNESS MÉDIO DA COMUNIDADE
+# =========================
+z0 = np.ones(3) / 3
+
+from replicator_game1_simple import replicator_dynamics
+
+z_res = replicator_dynamics(z0, Payoff)
+
+f_res = z_res @ Payoff @ z_res
+
+st.subheader("Fitness médio da comunidade")
+st.write(f"Valor: **{f_res:.4f}**")
+st.markdown("""
+O invasor consegue invadir se tiver **maior fitness** que o médio da comunidade residente.
+""")
+Ou seja:
+
+- Se o seu fitness é maior que o médio → invade   
+- Caso contrário → desaparece   
+
+---
+
+## Como calculamos isso?
+
+A taxa de crescimento do invasor depende das interações com a comunidade:
+
+""")
+st.latex(r"""
+r_{\text{invader}} = \sum_{j=1}^{N} z_j \lambda^{j}_{\text{inv}}-\bar{\lambda}
+""")
+st.markdown(r"""
+Onde:
+
+- $z_j$ = abundância da espécie $j$ na comunidade  
+- $\lambda^{j}_{\text{inv}}$ = fitness do invasor com a espécie $j$  
+- $\bar{\lambda} = \sum_{k<j} (\lambda^{j}_{k}+\lambda^{k}_{j}) z_{j}z_{k}$
+
+Isto diz-nos **o crescimento do invasor dentro da comunidade**
+""")
+
+st.markdown("""
+ O invasor invade se:
+
+**$r_{invader}$ > 0**
+
+---
+
+## O teu objetivo
+
+Escolhe os traits do invasor cuja soma é igual a 1, compreendidos entre -1 e 1, e tenta:
+
+ **Invadir a comunidade!**
+
+ou
+
+ Falhar a invasão
+
+---
+
+Move os sliders e testa 
+""")
+
 
 # =========================
 # SLIDERS
