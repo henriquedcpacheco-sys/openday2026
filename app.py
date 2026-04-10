@@ -68,7 +68,7 @@ def color_matrix(val):
     else:
         return 'background-color: white'
 
-styled_df = df.style.applymap(color_matrix)
+styled_df = df.style.map(color_matrix)
 
 st.dataframe(styled_df)
 
