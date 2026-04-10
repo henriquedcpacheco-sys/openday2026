@@ -107,7 +107,7 @@ x = sol.y.T
 
 import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots(figsize=(5, 3))
+fig, ax = plt.subplots(figsize=(4, 2))
 
 ax.plot(t, x[:, 0], 'r', label="Espécie 1")
 ax.plot(t, x[:, 1], 'g', label="Espécie 2")
