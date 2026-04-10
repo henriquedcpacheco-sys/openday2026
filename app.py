@@ -116,7 +116,7 @@ ax.plot(t, x[:, 2], 'b', label="Espécie 3")
 ax.set_xlabel("Tempo")
 ax.set_ylabel("Densidade relativa")
 ax.set_title("Dinâmica da comunidade (antes da invasão)")
-ax.legend()
+ax.legend(fontsize=6)
 
 st.pyplot(fig)
 
