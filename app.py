@@ -57,11 +57,16 @@ max_val = np.max(np.abs(df.values))
 
 max_val = np.max(np.abs(df.values))
 
+max_val = np.max(np.abs(df.values))
+
 def color_matrix(val):
     if max_val == 0:
         return ''
     
-    intensity = abs(val) / max_val  # normaliza entre 0 e 1
+    intensity = abs(val) / max_val
+    
+    # 🔥 limitar intensidade
+    intensity = 0.2 + 0.6 * intensity   # entre 0.2 e 0.8
 
     if val > 0:
         return f'background-color: rgba(255, 0, 0, {intensity})'
@@ -72,7 +77,7 @@ def color_matrix(val):
 
 styled_df = df.style.map(color_matrix)
 
-st.dataframe(styled_df)
+st.write(styled_df)
 
 # =========================
 # FITNESS MÉDIO DA COMUNIDADE
