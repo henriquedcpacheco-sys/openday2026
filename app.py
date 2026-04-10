@@ -53,7 +53,24 @@ df = pd.DataFrame(
     columns=[1, 2, 3]
 )
 
-st.dataframe(df)
+max_val = np.max(np.abs(df.values))
+
+def color_matrix(val):
+    if max_val == 0:
+        return ''
+    
+    intensity = abs(val) / max_val  # normaliza entre 0 e 1
+
+    if val > 0:
+        return f'background-color: rgba(255, 0, 0, {intensity})'
+    elif val < 0:
+        return f'background-color: rgba(0, 0, 255, {intensity})'
+    else:
+        return 'background-color: white'
+
+styled_df = df.style.applymap(color_matrix)
+
+st.dataframe(styled_df)
 
 # =========================
 # FITNESS MÉDIO DA COMUNIDADE
