@@ -169,7 +169,7 @@ st.markdown("""
 
 ## O teu objetivo
 
-Escolhe os traits do invasor cuja soma é igual a 1, compreendidos entre -1 e 1, e tenta:
+Escolhe ovetor de fitness do invasor cuja soma é igual a 1, cujos elementos estão compreendidos entre -1 e 1, e tenta:
 
  **Invadir a comunidade!**
 
@@ -186,14 +186,14 @@ Move os sliders e testa
 # =========================
 # SLIDERS
 # =========================
-st.subheader("Escolhe os traits do invasor (a soma tem de ser 1)")
+st.subheader("Escolhe o vetor de fitness do invasor (a soma tem de ser 1)")
 
-z1 = st.slider("Trait 1", -1.0, 1.0, 0.3)
-z2 = st.slider("Trait 2", -1.0, 1.0, 0.3)
+z1 = st.slider("invader→1", -1.0, 1.0, 0.3)
+z2 = st.slider("invader→2", -1.0, 1.0, 0.3)
 
 z3 = 1 - z1 - z2
 
-st.write(f"Trait 3 (automático): **{z3:.2f}**")
+st.write(f"invader→3 (automático): **{z3:.2f}**")
 
 if z3 < -1 or z3 > 1:
     st.error("⚠️ Valores inválidos!")
