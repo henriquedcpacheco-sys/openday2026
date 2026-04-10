@@ -55,6 +55,8 @@ df = pd.DataFrame(
 
 max_val = np.max(np.abs(df.values))
 
+max_val = np.max(np.abs(df.values))
+
 def color_matrix(val):
     if max_val == 0:
         return ''
