@@ -3,6 +3,16 @@ from scipy.integrate import solve_ivp
 import numpy as np
 from replicator_game1_simple import generate_matrices, invasion_test
 
+
+def replicator_rhs(t, x, A):
+    x = np.maximum(x, 1e-12)
+    x = x / np.sum(x)
+
+    fitness = A @ x
+    avg = x @ fitness
+
+    return x * (fitness - avg)
+
 st.set_page_config(page_title="Replicator Game", layout="centered")
 
 st.title("👾 Invasion Game")
@@ -207,11 +217,3 @@ if st.button("Testar invasão"):
         st.write(f"Fitness invader: {f_inv:.4f}")
         st.write(f"Fitness médio: {f_res:.4f}")
 
-def replicator_rhs(t, x, A):
-    x = np.maximum(x, 1e-12)
-    x = x / np.sum(x)
-
-    fitness = A @ x
-    avg = x @ fitness
-
-    return x * (fitness - avg)
