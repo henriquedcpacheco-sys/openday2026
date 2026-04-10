@@ -1,4 +1,5 @@
 import streamlit as st
+from scipy.integrate import solve_ivp
 import numpy as np
 from replicator_game1_simple import generate_matrices, invasion_test
 
@@ -78,6 +79,36 @@ def color_matrix(val):
 styled_df = df.style.map(color_matrix)
 
 st.write(styled_df)
+
+# =========================
+# DINÂMICA DOS RESIDENTES
+# =========================
+x0 = np.ones(3) / 3
+
+sol = solve_ivp(
+    lambda t, x: replicator_rhs(t, x, Payoff),
+    [0, 20],
+    x0,
+    t_eval=np.linspace(0, 20, 100)
+)
+
+t = sol.t
+x = sol.y.T
+
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+ax.plot(t, x[:, 0], 'r', label="Espécie 1")
+ax.plot(t, x[:, 1], 'g', label="Espécie 2")
+ax.plot(t, x[:, 2], 'b', label="Espécie 3")
+
+ax.set_xlabel("Tempo")
+ax.set_ylabel("Densidade relativa")
+ax.set_title("Dinâmica da comunidade (antes da invasão)")
+ax.legend()
+
+st.pyplot(fig)
 
 # =========================
 # FITNESS MÉDIO DA COMUNIDADE
@@ -175,3 +206,12 @@ if st.button("Testar invasão"):
         f_inv, f_res, z_res = values
         st.write(f"Fitness invader: {f_inv:.4f}")
         st.write(f"Fitness médio: {f_res:.4f}")
+
+def replicator_rhs(t, x, A):
+    x = np.maximum(x, 1e-12)
+    x = x / np.sum(x)
+
+    fitness = A @ x
+    avg = x @ fitness
+
+    return x * (fitness - avg)
