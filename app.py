@@ -66,7 +66,7 @@ def color_matrix(val):
     intensity = abs(val) / max_val
     
     # 🔥 limitar intensidade
-    intensity = 0.5  # entre 0.2 e 0.8
+    intensity = 0.2 + 0.5*intensity  # entre 0.2 e 0.8
 
     if val > 0:
         return f'background-color: rgba(255, 0, 0, {intensity})'
