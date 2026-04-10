@@ -66,7 +66,7 @@ z_res = replicator_dynamics(z0, Payoff)
 
 f_res = z_res @ Payoff @ z_res
 
-st.write("Fitness médio da comunidade" f"Valor: **{f_res:.4f}**")
+st.write("Fitness médio da comunidade": **{f_res:.4f}**")
 st.markdown("""
 O invasor consegue invadir se tiver **maior fitness** que o médio da comunidade residente.
 
