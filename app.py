@@ -70,14 +70,14 @@ st.subheader("Fitness médio da comunidade")
 st.write(f"Valor: **{f_res:.4f}**")
 st.markdown("""
 O invasor consegue invadir se tiver **maior fitness** que o médio da comunidade residente.
-""")
+
 Ou seja:
 
 - Se o seu fitness é maior que o médio → invade   
 - Caso contrário → desaparece   
 
 ---
-
+""")
 ## Como calculamos isso?
 
 A taxa de crescimento do invasor depende das interações com a comunidade:
