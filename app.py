@@ -169,7 +169,7 @@ st.markdown("""
 
 ## O teu objetivo
 
-Escolhe ovetor de fitness do invasor cuja soma é igual a 1, cujos elementos estão compreendidos entre -1 e 1, e tenta:
+Escolhe o vetor de fitness do invasor cuja soma é igual a 1, cujos elementos estão compreendidos entre -1 e 1, e tenta:
 
  **Invadir a comunidade!**
 
