@@ -4,7 +4,7 @@ from replicator_game1_simple import generate_matrices, invasion_test
 
 st.set_page_config(page_title="Replicator Game", layout="centered")
 
-st.title("👾 Replicator Invasion Game")
+st.title("👾 Invasion Game")
 st.markdown("""
 ## O que está a acontecer aqui?
 
@@ -12,7 +12,7 @@ Imagina uma comunidade de espécies (por exemplo bactérias).
 Cada espécie interage com as outras — algumas cooperam, outras competem.
 
 Agora entra um **invasor**   
-Será que ele consegue instalar-se?
+Será que ele consegue instalar-se no **curto prazo**?
 
 ---
 
