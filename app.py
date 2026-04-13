@@ -15,7 +15,7 @@ def replicator_rhs(t, x, A):
 
 st.set_page_config(page_title="Replicator Game", layout="centered")
 
-st.title("👾 Invasion Game")
+st.title("👾 Invasion Game - Dinâmicas de Curto Prazo")
 
 st.markdown("""
 Henrique Pacheco, CEMAT henrique.v.pacheco@tecnico.ulisboa.pt
