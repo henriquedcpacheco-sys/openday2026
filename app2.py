@@ -69,19 +69,19 @@ st.dataframe(df)
 # =========================
 st.subheader("Escolhe os traits de fitness do invasor (linha)")
 
-z1 = st.slider("Invader trait 1", -1.0, 1.0, 0.2)
-z2 = st.slider("Invader trait 2", -1.0, 1.0, 0.2)
+z1 = st.slider("invasor→1", -1.0, 1.0, 0.2)
+z2 = st.slider("invasor→2", -1.0, 1.0, 0.2)
 inv = build_traits(z1, z2)
 
-st.write(f"Trait 3: **{inv[2]:.2f}**")
+st.write(f"invasor→3: **{inv[2]:.2f}**")
 
 st.subheader("Escolhe como a comunidade reage ao invasor (coluna)")
 
-r1 = st.slider("Resident response 1", -1.0, 1.0, 0.4)
-r2 = st.slider("Resident response 2", -1.0, 1.0, 0.3)
+r1 = st.slider("1→invasor", -1.0, 1.0, 0.4)
+r2 = st.slider("2→invasor", -1.0, 1.0, 0.3)
 res = build_traits(r1, r2)
 
-st.write(f"Response 3: **{res[2]:.2f}**")
+st.write(f"3→invasor: **{res[2]:.2f}**")
 
 # =========================
 # BOTÃO
