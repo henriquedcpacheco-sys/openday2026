@@ -11,7 +11,14 @@ from replicator_game2_dynamics import (
 
 st.set_page_config(page_title="Replicator Dynamics Game", layout="centered")
 
-st.title("🧬 Replicator Dynamics — Invasion Game")
+st.title("👾Invasion Game - Dinâmicas de Longo Prazo")
+
+st.markdown("""
+Henrique Pacheco, CEMAT henrique.v.pacheco@tecnico.ulisboa.pt
+
+Erida Gjini, CEMAT erida.gjini@tecnico.ulisboa.pt
+""")
+
 
 st.markdown("""
 Agora o jogo é:
@@ -20,9 +27,13 @@ Agora o jogo é:
 2. O invasor entra com baixa abundância  
 3. Vemos a dinâmica completa  
 
-Será que ele consegue instalar-se?
+Será que ele consegue instalar-se no **longo prazo**?
 """)
+st.markdown("""
+## Regra do jogo
 
+Agora em vez de escolheres apenas os parâmetros fitness do invasor, terás de escolher também como as espécies residentes reagem 
+""")
 # =========================
 # MATRIZES
 # =========================
@@ -84,7 +95,14 @@ if st.button(" Simular dinâmica"):
     # PLOT ANIMADO
     # =========================
     fig, ax = plt.subplots()
-
+    
+    ax.axvline(
+    x=t_invasion,
+    linestyle='--',
+    linewidth=2,
+    color='black',
+    label="Invasão"
+)
     ax.set_xlim(0, max(t1)+max(t2))
     ax.set_ylim(0, 1)
 
