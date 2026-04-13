@@ -195,12 +195,12 @@ Move os sliders e testa
 # =========================
 st.subheader("Escolhe o vetor de fitness do invasor (a soma tem de ser 1)")
 
-z1 = st.slider("invader→1", -1.0, 1.0, 0.3)
-z2 = st.slider("invader→2", -1.0, 1.0, 0.3)
+z1 = st.slider("invasor→1", -1.0, 1.0, 0.3)
+z2 = st.slider("invasor→2", -1.0, 1.0, 0.3)
 
 z3 = 1 - z1 - z2
 
-st.write(f"invader→3 (automático): **{z3:.2f}**")
+st.write(f"invasor→3 (automático): **{z3:.2f}**")
 
 if z3 < -1 or z3 > 1:
     st.error("⚠️ Valores inválidos!")
