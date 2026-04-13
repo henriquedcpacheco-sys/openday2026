@@ -62,7 +62,7 @@ else:
 # =========================
 # MOSTRAR MATRIZ
 # =========================
-st.subheader("Matriz de interações")
+st.subheader("Matriz de interações da comunidade residente")
 import pandas as pd
 
 df = pd.DataFrame(
