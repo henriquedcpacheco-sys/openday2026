@@ -84,6 +84,63 @@ res = build_traits(r1, r2)
 st.write(f"3→invasor: **{res[2]:.2f}**")
 
 # =========================
+# MATRIZ 4x4 (VISUAL)
+# =========================
+A4 = np.zeros((4, 4))
+
+A4[:3, :3] = Payoff
+A4[3, :3] = inv
+A4[:3, 3] = res
+
+df4 = pd.DataFrame(
+    np.round(A4, 2),
+    index=["1", "2", "3", "Inv"],
+    columns=["1", "2", "3", "Inv"]
+)
+
+st.subheader("Matriz completa (com invasor)")
+
+# =========================
+# STYLE (highlight invasor)
+# =========================
+max_val = np.max(np.abs(df4.values))
+
+def style_matrix(val, i, j):
+    if max_val == 0:
+        return ''
+    
+    intensity = 0.2 + 0.6 * abs(val) / max_val
+
+    # cores base
+    if val > 0:
+        color = f'rgba(255,100,100,{intensity})'
+    elif val < 0:
+        color = f'rgba(100,100,255,{intensity})'
+    else:
+        color = 'white'
+
+    style = f'background-color: {color};'
+
+    # 🔥 highlight linha e coluna do invasor
+    if i == 3 or j == 3:
+        style += 'border: 2px solid black; font-weight: bold;'
+
+    return style
+
+
+styled = df4.style
+
+styled = styled.apply(
+    lambda row: [
+        style_matrix(row[j], i, j)
+        for j in range(len(row))
+    ],
+    axis=1
+)
+
+st.write(styled)
+
+# =========================
 # BOTÃO
 # =========================
 if st.button("🚀 Simular dinâmica"):
