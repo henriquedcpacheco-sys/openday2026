@@ -208,7 +208,7 @@ if z3 < -1 or z3 > 1:
 # =========================
 # BOTÃO
 # =========================
-if st.button("Testar invasão"):
+if st.button("🚀Testar invasão"):
 
     result, values = invasion_test(z1, z2, Payoff)
 
