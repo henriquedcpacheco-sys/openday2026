@@ -105,41 +105,36 @@ st.subheader("Matriz completa (com invasor)")
 # =========================
 max_val = np.max(np.abs(df4.values))
 
-def style_matrix(val, i, j):
+def color_matrix(val):
     if max_val == 0:
         return ''
     
     intensity = 0.2 + 0.6 * abs(val) / max_val
 
-    # cores base
     if val > 0:
-        color = f'rgba(255,100,100,{intensity})'
+        return f'background-color: rgba(255,100,100,{intensity})'
     elif val < 0:
-        color = f'rgba(100,100,255,{intensity})'
+        return f'background-color: rgba(100,100,255,{intensity})'
     else:
-        color = 'white'
-
-    style = f'background-color: {color};'
-
-    # 🔥 highlight linha e coluna do invasor
-    if i == 3 or j == 3:
-        style += 'border: 2px solid black; font-weight: bold;'
-
-    return style
+        return 'background-color: white'
 
 
-styled = df4.style
+# base color
+styled = df4.style.map(color_matrix)
 
-styled = styled.apply(
-    lambda row: [
-        style_matrix(row[j], i, j)
-        for j in range(len(row))
-    ],
-    axis=1
+# 🔥 highlight linha do invasor
+styled = styled.set_properties(
+    subset=pd.IndexSlice["Inv", :],
+    **{'border': '2px solid black', 'font-weight': 'bold'}
+)
+
+# 🔥 highlight coluna do invasor
+styled = styled.set_properties(
+    subset=pd.IndexSlice[:, "Inv"],
+    **{'border': '2px solid black', 'font-weight': 'bold'}
 )
 
 st.write(styled)
-
 # =========================
 # BOTÃO
 # =========================
