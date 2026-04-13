@@ -11,14 +11,12 @@ from replicator_game2_dynamics import (
 
 st.set_page_config(page_title="Replicator Dynamics Game", layout="centered")
 
-st.title("👾Invasion Game - Dinâmicas de Longo Prazo")
+st.title("👾 Invasion Game - Dinâmicas de Longo Prazo")
 
 st.markdown("""
-Henrique Pacheco, CEMAT henrique.v.pacheco@tecnico.ulisboa.pt
-
+Henrique Pacheco, CEMAT henrique.v.pacheco@tecnico.ulisboa.pt  
 Erida Gjini, CEMAT erida.gjini@tecnico.ulisboa.pt
 """)
-
 
 st.markdown("""
 Agora o jogo é:
@@ -29,17 +27,19 @@ Agora o jogo é:
 
 Será que ele consegue instalar-se no **longo prazo**?
 """)
+
 st.markdown("""
 ## Regra do jogo
 
 Agora em vez de escolheres apenas os parâmetros fitness do invasor, terás de escolher também como as espécies residentes reagem 
 """)
+
 # =========================
 # MATRIZES
 # =========================
 @st.cache_data
 def get_matrices():
-    return generate_matrices(seed=22) ####################### MUDAR SEED AQUI
+    return generate_matrices(seed=22)
 
 A, B, C = get_matrices()
 
@@ -55,8 +55,11 @@ elif "B" in choice:
 else:
     Payoff = C
 
-# mostrar matriz bonita
+# =========================
+# MOSTRAR MATRIZ
+# =========================
 import pandas as pd
+
 df = pd.DataFrame(np.round(Payoff, 2), index=[1,2,3], columns=[1,2,3])
 st.subheader("Matriz de interações")
 st.dataframe(df)
@@ -72,7 +75,7 @@ inv = build_traits(z1, z2)
 
 st.write(f"Trait 3: **{inv[2]:.2f}**")
 
-st.subheader(" Escolhe como a comunidade reage ao invasor (coluna)")
+st.subheader("Escolhe como a comunidade reage ao invasor (coluna)")
 
 r1 = st.slider("Resident response 1", -1.0, 1.0, 0.4)
 r2 = st.slider("Resident response 2", -1.0, 1.0, 0.3)
@@ -83,43 +86,46 @@ st.write(f"Response 3: **{res[2]:.2f}**")
 # =========================
 # BOTÃO
 # =========================
-if st.button(" Simular dinâmica"):
+if st.button("🚀 Simular dinâmica"):
 
-    # correr simulação
     t1, x1, t2, x2, eq = run_dynamics(inv, res, Payoff)
 
     st.subheader("Equilíbrio antes da invasão")
     st.write(np.round(eq, 3))
 
     # =========================
-    # PLOT ANIMADO
+    # PLOT
     # =========================
-    fig, ax = plt.subplots()
-    
-    ax.axvline(
-    x=t_invasion,
-    linestyle='--',
-    linewidth=2,
-    color='black',
-    label="Invasão"
-)
-    ax.set_xlim(0, max(t1)+max(t2))
+    fig, ax = plt.subplots(figsize=(5, 3))
+
+    ax.set_xlim(0, max(t1) + max(t2))
     ax.set_ylim(0, 1)
 
     ax.set_xlabel("Tempo")
     ax.set_ylabel("Densidade")
 
+    # 🔥 linha de invasão
+    t_invasion = max(t1)
+    ax.axvline(
+        x=t_invasion,
+        linestyle='--',
+        linewidth=2,
+        color='black',
+        label="Invasão"
+    )
+
+    # linhas
     line1, = ax.plot([], [], 'r', label="Res1")
     line2, = ax.plot([], [], 'g', label="Res2")
     line3, = ax.plot([], [], 'b', label="Res3")
     line4, = ax.plot([], [], 'k', label="Invader")
 
-    ax.legend()
+    ax.legend(fontsize=7, frameon=False)
 
     plot_placeholder = st.pyplot(fig)
 
     # =========================
-    # FASE 1 (pré-invasão)
+    # FASE 1
     # =========================
     for k in range(len(t1)):
         line1.set_data(t1[:k], x1[:k, 0])
@@ -127,10 +133,10 @@ if st.button(" Simular dinâmica"):
         line3.set_data(t1[:k], x1[:k, 2])
 
         plot_placeholder.pyplot(fig)
-        time.sleep(0.02)
+        time.sleep(0.01)
 
     # =========================
-    # FASE 2 (com invasor)
+    # FASE 2
     # =========================
     t_shift = t2 + max(t1)
 
@@ -157,14 +163,14 @@ if st.button(" Simular dinâmica"):
         )
 
         plot_placeholder.pyplot(fig)
-        time.sleep(0.02)
+        time.sleep(0.01)
 
     # =========================
-    # RESULTADO FINAL
+    # RESULTADO
     # =========================
     final_inv = x2[-1, 3]
 
     if final_inv > 1e-4:
-        st.success(" O invasor instalou-se!")
+        st.success("🔥 O invasor instalou-se!")
     else:
-        st.error(" O invasor falhou!")
+        st.error("❌ O invasor falhou!")
