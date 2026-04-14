@@ -62,7 +62,27 @@ import pandas as pd
 
 df = pd.DataFrame(np.round(Payoff, 2), index=[1,2,3], columns=[1,2,3])
 st.subheader("Matriz de interações")
-st.dataframe(df)
+# =========================
+# CORES MATRIZ 3x3
+# =========================
+max_val3 = np.max(np.abs(df.values))
+
+def color_matrix3(val):
+    if max_val3 == 0:
+        return ''
+    
+    intensity = 0.2 + 0.6 * abs(val) / max_val3
+
+    if val > 0:
+        return f'background-color: rgba(255,100,100,{intensity})'
+    elif val < 0:
+        return f'background-color: rgba(100,100,255,{intensity})'
+    else:
+        return 'background-color: white'
+
+styled_df = df.style.map(color_matrix3)
+
+st.dataframe(styled_df, use_container_width=True)
 
 # =========================
 # SLIDERS
