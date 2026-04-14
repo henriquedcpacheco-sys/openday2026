@@ -61,7 +61,7 @@ else:
 import pandas as pd
 
 df = pd.DataFrame(np.round(Payoff, 2), index=[1,2,3], columns=[1,2,3])
-st.subheader("Matriz de interações")
+st.subheader("Matriz de interações da comunidade residente")
 # =========================
 # CORES MATRIZ 3x3
 # =========================
