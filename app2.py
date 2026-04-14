@@ -37,7 +37,6 @@ Agora em vez de escolheres apenas os parâmetros fitness do invasor, terás de e
 # =========================
 # MATRIZES
 # =========================
-@st.cache_data
 st.subheader("Matriz de interações da comunidade residente")
 import pandas as pd
 
