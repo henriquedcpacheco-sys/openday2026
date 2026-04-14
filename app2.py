@@ -38,22 +38,40 @@ Agora em vez de escolheres apenas os parâmetros fitness do invasor, terás de e
 # MATRIZES
 # =========================
 @st.cache_data
-def get_matrices():
-    return generate_matrices(seed=22)
+st.subheader("Matriz de interações da comunidade residente")
+import pandas as pd
 
-A, B, C = get_matrices()
-
-choice = st.selectbox(
-    "Escolhe a matriz:",
-    ["A (simétrica)", "B (antissimétrica)", "C (aleatória)"]
+df = pd.DataFrame(
+    np.round(Payoff, 2),
+    index=[1, 2, 3],
+    columns=[1, 2, 3]
 )
 
-if "A" in choice:
-    Payoff = A
-elif "B" in choice:
-    Payoff = B
-else:
-    Payoff = C
+max_val = np.max(np.abs(df.values))
+
+max_val = np.max(np.abs(df.values))
+
+max_val = np.max(np.abs(df.values))
+
+def color_matrix(val):
+    if max_val == 0:
+        return ''
+    
+    intensity = abs(val) / max_val
+    
+    # 🔥 limitar intensidade
+    intensity = 0.2 + 0.2*intensity  # entre 0.2 e 0.8
+
+    if val > 0:
+        return f'background-color: rgba(255, 0, 0, {intensity})'
+    elif val < 0:
+        return f'background-color: rgba(0, 0, 255, {intensity})'
+    else:
+        return 'background-color: white'
+
+styled_df = df.style.map(color_matrix)
+
+st.write(styled_df)
 
 # =========================
 # MOSTRAR MATRIZ
