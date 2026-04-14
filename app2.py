@@ -37,40 +37,23 @@ Agora em vez de escolheres apenas os parâmetros fitness do invasor, terás de e
 # =========================
 # MATRIZES
 # =========================
-st.subheader("Matriz de interações da comunidade residente")
-import pandas as pd
+@st.cache_data
+def get_matrices():
+    return generate_matrices(seed=22)
 
-df = pd.DataFrame(
-    np.round(Payoff, 2),
-    index=[1, 2, 3],
-    columns=[1, 2, 3]
+A, B, C = get_matrices()
+
+choice = st.selectbox(
+    "Escolhe a matriz:",
+    ["A (simétrica)", "B (antissimétrica)", "C (aleatória)"]
 )
 
-max_val = np.max(np.abs(df.values))
-
-max_val = np.max(np.abs(df.values))
-
-max_val = np.max(np.abs(df.values))
-
-def color_matrix(val):
-    if max_val == 0:
-        return ''
-    
-    intensity = abs(val) / max_val
-    
-    # 🔥 limitar intensidade
-    intensity = 0.2 + 0.2*intensity  # entre 0.2 e 0.8
-
-    if val > 0:
-        return f'background-color: rgba(255, 0, 0, {intensity})'
-    elif val < 0:
-        return f'background-color: rgba(0, 0, 255, {intensity})'
-    else:
-        return 'background-color: white'
-
-styled_df = df.style.map(color_matrix)
-
-st.write(styled_df)
+if "A" in choice:
+    Payoff = A
+elif "B" in choice:
+    Payoff = B
+else:
+    Payoff = C
 
 # =========================
 # MOSTRAR MATRIZ
@@ -78,7 +61,7 @@ st.write(styled_df)
 import pandas as pd
 
 df = pd.DataFrame(np.round(Payoff, 2), index=[1,2,3], columns=[1,2,3])
-st.subheader("Matriz de interações da comunidade residente")
+st.subheader("Matriz de interações")
 st.dataframe(df)
 
 # =========================
@@ -86,19 +69,19 @@ st.dataframe(df)
 # =========================
 st.subheader("Escolhe os traits de fitness do invasor (linha)")
 
-z1 = st.slider("invasor→1", -1.0, 1.0, 0.2)
-z2 = st.slider("invasor→2", -1.0, 1.0, 0.2)
+z1 = st.slider("Invader trait 1", -1.0, 1.0, 0.2)
+z2 = st.slider("Invader trait 2", -1.0, 1.0, 0.2)
 inv = build_traits(z1, z2)
 
-st.write(f"invasor→3: **{inv[2]:.2f}**")
+st.write(f"Trait 3: **{inv[2]:.2f}**")
 
 st.subheader("Escolhe como a comunidade reage ao invasor (coluna)")
 
-r1 = st.slider("1→invasor", -1.0, 1.0, 0.4)
-r2 = st.slider("2→invasor", -1.0, 1.0, 0.3)
+r1 = st.slider("Resident response 1", -1.0, 1.0, 0.4)
+r2 = st.slider("Resident response 2", -1.0, 1.0, 0.3)
 res = build_traits(r1, r2)
 
-st.write(f"3→invasor: **{res[2]:.2f}**")
+st.write(f"Response 3: **{res[2]:.2f}**")
 
 # =========================
 # MATRIZ 4x4 (VISUAL)
@@ -120,6 +103,8 @@ st.subheader("Matriz completa (com invasor)")
 # =========================
 # STYLE (highlight invasor)
 # =========================
+max_val = np.max(np.abs(df4.values))
+
 max_val = np.max(np.abs(df4.values))
 
 def color_matrix(val):
@@ -152,6 +137,7 @@ styled = styled.set_properties(
 )
 
 st.write(styled)
+
 # =========================
 # BOTÃO
 # =========================
