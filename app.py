@@ -190,6 +190,22 @@ ou
 Move os sliders e testa 
 """)
 
+# =========================
+# ESCOLHER TEMPO DE INVASÃO
+# =========================
+st.subheader("Escolhe o tempo de invasão")
+
+t_invasion = st.slider("Tempo de invasão", 0.0, 20.0, 10.0)
+
+# encontrar índice mais próximo
+idx = np.argmin(np.abs(t - t_invasion))
+
+z_res_t = x[idx]   # estado da comunidade nesse tempo
+
+# fitness médio nesse momento
+f_res_t = z_res_t @ Payoff @ z_res_t
+
+st.write(f"**Fitness médio no tempo t = {t_invasion:.2f}**: {f_res_t:.4f}")
 
 # =========================
 # SLIDERS
@@ -211,17 +227,66 @@ if z3 < -1 or z3 > 1:
 # =========================
 if st.button("🚀Testar invasão"):
 
-    result, values = invasion_test(z1, z2, Payoff)
+    # estado da comunidade no tempo escolhido
+    z_res = z_res_t
 
-    st.subheader("Resultado")
+    # vetor invasor
+    z_inv = np.array([z1, z2, z3])
 
-    if "Conseguiste" in result:
-        st.success(result)
+    # =========================
+    # MATRIZ 4x4 (sem reação)
+    # =========================
+    A4 = np.zeros((4, 4))
+    A4[:3, :3] = Payoff
+    A4[3, :3] = z_inv     # invasor → residentes
+    # coluna do invasor = 0 (sem reação)
+
+    # =========================
+    # CONDIÇÃO INICIAL
+    # =========================
+    eps = 1e-3
+
+    x0_4 = np.zeros(4)
+    x0_4[:3] = z_res * (1 - eps)
+    x0_4[3] = eps
+
+    # =========================
+    # DINÂMICA CURTO PRAZO
+    # =========================
+    sol2 = solve_ivp(
+        lambda t, x: replicator_rhs(t, x, A4),
+        [0, 5],   # só curto prazo
+        x0_4,
+        t_eval=np.linspace(0, 5, 50)
+    )
+
+    t2 = sol2.t
+    x2 = sol2.y.T
+
+    # =========================
+    # RESULTADO
+    # =========================
+    final_inv = x2[-1, 3]
+
+    st.subheader("Resultado da invasão (curto prazo)")
+
+    if final_inv > eps:
+        st.success("O invasor começou a crescer!")
     else:
-        st.error(result)
+        st.error("O invasor não conseguiu crescer")
 
-    if values:
-        f_inv, f_res, z_res = values
-        st.write(f"Fitness invader: {f_inv:.4f}")
-        st.write(f"Fitness médio: {f_res:.4f}")
+    # =========================
+    # PLOT
+    # =========================
+    fig2, ax2 = plt.subplots(figsize=(4, 2))
 
+    ax2.plot(t2, x2[:, 0], 'r', label="Espécie 1")
+    ax2.plot(t2, x2[:, 1], 'g', label="Espécie 2")
+    ax2.plot(t2, x2[:, 2], 'b', label="Espécie 3")
+    ax2.plot(t2, x2[:, 3], 'k', label="Invasor")
+
+    ax2.set_xlabel("Tempo (após invasão)")
+    ax2.set_ylabel("Densidade")
+    ax2.legend(fontsize=6)
+
+    st.pyplot(fig2)
