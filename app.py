@@ -279,10 +279,6 @@ if st.button("🚀Testar invasão"):
     # PLOT
     # =========================
     fig2, ax2 = plt.subplots(figsize=(4, 2))
-
-    ax2.plot(t2, x2[:, 0], 'r', label="Espécie 1")
-    ax2.plot(t2, x2[:, 1], 'g', label="Espécie 2")
-    ax2.plot(t2, x2[:, 2], 'b', label="Espécie 3")
     ax2.plot(t2, x2[:, 3], 'k', label="Invasor")
 
     ax2.set_xlabel("Tempo (após invasão)")
