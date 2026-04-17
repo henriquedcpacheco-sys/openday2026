@@ -150,7 +150,7 @@ st.markdown("""
  O invasor invade se:
 
 **$r_{invader}$ > 0**
-
+""")
 # =========================
 # FITNESS MÉDIO DA COMUNIDADE
 # =========================
@@ -163,6 +163,7 @@ z_res = replicator_dynamics(z0, Payoff)
 f_res = z_res @ Payoff @ z_res
 
 st.write(f"**Fitness médio da comunidade**: {f_res:.4f}")
+
 st.markdown("""
 O invasor consegue invadir se tiver **maior fitness** que o médio da comunidade residente.
 
@@ -171,10 +172,9 @@ Ou seja:
 - Se o seu fitness é maior que o médio → invade   
 - Caso contrário → desaparece   
 
----
 """)
 ---
-
+st.markdown("""
 ## O teu objetivo
 
 Escolhe o vetor de fitness do invasor cuja soma é igual a 1, cujos elementos estão compreendidos entre -1 e 1, e tenta:
