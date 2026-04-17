@@ -127,28 +127,7 @@ ax.legend(fontsize=6)
 
 st.pyplot(fig)
 
-# =========================
-# FITNESS MÉDIO DA COMUNIDADE
-# =========================
-z0 = np.ones(3) / 3
 
-from replicator_game1_simple import replicator_dynamics
-
-z_res = replicator_dynamics(z0, Payoff)
-
-f_res = z_res @ Payoff @ z_res
-
-st.write(f"**Fitness médio da comunidade**: {f_res:.4f}")
-st.markdown("""
-O invasor consegue invadir se tiver **maior fitness** que o médio da comunidade residente.
-
-Ou seja:
-
-- Se o seu fitness é maior que o médio → invade   
-- Caso contrário → desaparece   
-
----
-""")
 ## Como calculamos isso?
 
 st.markdown("""A taxa de crescimento do invasor no momento de invasão depende das suas interações com a comunidade:
@@ -172,6 +151,28 @@ st.markdown("""
 
 **$r_{invader}$ > 0**
 
+# =========================
+# FITNESS MÉDIO DA COMUNIDADE
+# =========================
+z0 = np.ones(3) / 3
+
+from replicator_game1_simple import replicator_dynamics
+
+z_res = replicator_dynamics(z0, Payoff)
+
+f_res = z_res @ Payoff @ z_res
+
+st.write(f"**Fitness médio da comunidade**: {f_res:.4f}")
+st.markdown("""
+O invasor consegue invadir se tiver **maior fitness** que o médio da comunidade residente.
+
+Ou seja:
+
+- Se o seu fitness é maior que o médio → invade   
+- Caso contrário → desaparece   
+
+---
+""")
 ---
 
 ## O teu objetivo
