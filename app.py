@@ -173,7 +173,7 @@ Ou seja:
 - Caso contrário → desaparece   
 
 """)
----
+
 st.markdown("""
 ## O teu objetivo
 
