@@ -45,7 +45,7 @@ Começamos por escolher um tipo de microbioma (se as espécies residentes cooper
 def get_matrices():
     return generate_matrices()
 
-A, B, C = get_matrices()
+A, B, C = get_matrices(15)
 
 matrix_choice = st.selectbox(
     "Escolhe a matriz:",
