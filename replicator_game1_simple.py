@@ -3,7 +3,7 @@ import numpy as np
 # =========================
 # MATRIZES
 # =========================
-def generate_matrices():
+def generate_matrices(seed=15):
     np.random.seed(seed)
 
     # A simétrica
